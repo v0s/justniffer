@@ -60,6 +60,10 @@ void parser::nids_handler(struct tcp_stream *ts, void **yoda, struct timeval* t,
 			}
 			break;
 		case NIDS_EXITING:
+		    if (theOnlyParser->handle_truncated)
+		    {
+                theOnlyParser->process_timedout_connection(ts, t, packet);
+		    }
 		    break;	
 		case NIDS_OPENING:
 			theOnlyParser->process_opening_connection(ts, t, packet);
